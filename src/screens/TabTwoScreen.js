@@ -1,35 +1,77 @@
-import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import * as React from "react";
+import { StyleSheet, View, Text, ActivityIndicator, SafeAreaView, FlatList } from "react-native";
 
-import Button from '../components/Button';
+import { useState, useEffect } from "react";
+import { getHistoric } from "../services/reading";
 
 export default function TabTwoScreen() {
- function teste(){
-    alert("AAA")
+  const [historic, setHistoric] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchHistoric();
+  }, [historic]);
+
+  async function fetchHistoric() {
+    const response = await getHistoric();
+    if(historic != response || historic.length < 1) setHistoric(response);    
+    setIsLoading(false)
   }
+
+  const renderItem = ({ item }) => (
+    <View style={styles.card}>
+      <Text style={styles.title}>{item.created_at} - Média: {item.average}</Text>
+      <Text style={styles.text}>Você leu {item.pages} paginas em {item.duration} segundos</Text>     
+    </View>    
+  );
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} />   
-      <Button text="Start" textColor="#F7F8F7" backgroundColor="#737575" onPress={data => teste("AAA")} />
-    </View>
+    <SafeAreaView style={styles.container}>
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        
+        <FlatList
+          data={historic}
+          renderItem={renderItem}
+          keyExtractor={item => item.id.toString()}
+        />
+      
+      )}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#F7F8F7',
+  card: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 5,
+    padding: 15,
+    paddingLeft: 60,
+    paddingRight: 60,
+    marginTop: 20,
+    backgroundColor: "#b5a7ff",
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  container: {
+    backgroundColor: "#ffc5dd",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
+    color: "#ffb4ed",
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+  },
+  text: {
+    color: "#F7F8F7",
   },
   separator: {
+    backgroundColor: "red",
     marginVertical: 30,
     height: 1,
-    width: '80%',
+    width: "80%",
   },
 });

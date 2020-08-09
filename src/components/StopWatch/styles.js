@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   numbers: {
     fontSize: 40,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: "#b5a7ff"   
   },
   container: {
     padding: 10,

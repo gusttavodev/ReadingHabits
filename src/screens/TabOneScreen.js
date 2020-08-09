@@ -4,10 +4,10 @@ import {
   View,
   Text,
   TextInput,
-  AsyncStorage,
   Alert,
+  AsyncStorage
 } from "react-native";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 import StopWatch from "../components/StopWatch";
 import Button from "../components/Button";
@@ -17,6 +17,10 @@ import {storeReading} from '../services/reading';
 export default function TabOneScreen() {
   const [numberOfPages, setNumberOfPages] = useState("");
   const [readingDuration, setReadingDuration] = useState("");
+
+  const clear = async () => {
+    await AsyncStorage.clear();
+  };
   
   const save = async () => {
     const current_datetime = new Date()
@@ -24,6 +28,7 @@ export default function TabOneScreen() {
     const month = current_datetime.getMonth()
     const year = current_datetime.getFullYear()
     const data = {
+      id: Date.now(),
       created_at: `${year}/${month}/${day}`,
       pages: numberOfPages,
       duration: readingDuration,
@@ -34,7 +39,7 @@ export default function TabOneScreen() {
 
   const onStop = async (data) => {
     setReadingDuration(data)
-   console.log("data", data);
+    console.log("data", data);
   };
 
   const onStart = async (data) => {
@@ -60,7 +65,7 @@ export default function TabOneScreen() {
         onReset={(data) => onReset(data)}
       />
       <View style={styles.separator} />
-      <Text>Quantidade de paginas</Text>
+      <Text style={styles.title}>Quantidade de paginas</Text>
       <TextInput
         style={styles.numberInput}
         onChangeText={(value) => setNumberOfPages(value)}
@@ -69,10 +74,16 @@ export default function TabOneScreen() {
         value={`${numberOfPages}`}
       />
       <View style={styles.container}>
+      <Button
+          text="LIMPAR"
+          textColor="#F7F8F7"
+          backgroundColor="#b5a7ff"
+          onPress={(data) => clear()}
+        />
         <Button
           text="SALVAR LEITURA"
           textColor="#F7F8F7"
-          backgroundColor="#737575"
+          backgroundColor="#b5a7ff"
           onPress={(data) => save()}
         />
       </View>
@@ -82,27 +93,30 @@ export default function TabOneScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#ffc5dd",
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
+    color: "#F7F8F7",
     fontSize: 20,
     fontWeight: "bold",
   },
   separator: {
-    backgroundColor: "red",
+    backgroundColor: "#b5a7ff",
     marginVertical: 30,
     height: 1,
     width: "80%",
   },
   numberInput: {
+    backgroundColor: "#b5a7ff",
     margin: 5,
-    borderRadius: 10,
-    padding: 10,
-    height: 40,
-    width: 60,
-    borderColor: "gray",
+    padding: 20,
+    borderRadius: 5, 
+    textAlign: 'center',
+    color: "#F7F8F7",
+    borderColor: "#F7F8F7",
     borderWidth: 2,
   },
 });

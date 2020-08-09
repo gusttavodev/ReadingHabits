@@ -1,22 +1,35 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
+import { StyleSheet } from "react-native";
 
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const BottomTab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator
-     
+      <BottomTab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          if (route.name === 'Registrar') {
+            iconName = "ios-book"
+          } else if (route.name === 'Historico') {
+            iconName = "ios-eye"
+          }          
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
       initialRouteName="TabOne"
       tabBarOptions={{
         activeTintColor: '#F7F8F7',
-        inactiveTintColor: '#737575',
+        inactiveTintColor: '#d6b5ff',
         style: {
-          backgroundColor: '#A6A8AE',
+          backgroundColor: '#b5a7ff',
         },
         labelStyle: {
           textAlign: 'center',
@@ -24,28 +37,19 @@ export default function BottomTabNavigator() {
         },
       }}>
       <BottomTab.Screen
-        name="TabOne"
+        name="Registrar"
         component={TabOneNavigator}
-        // options={{
-        //   tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        // }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="Historico"
         component={TabTwoNavigator}
-        // options={{
-        //   tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
-        // }}
+        options={{        
+          // tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+        }}
       />
     </BottomTab.Navigator>
   );
 }
-
-// You can explore the built-in icon families and icons on the web at:
-// https://icons.expo.fyi/
-// function TabBarIcon(props: { name: string; color: string }) {
-//   return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
-// }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
@@ -57,7 +61,11 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name="TabOneScreen"
         component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+        options={{
+          headerTitle: 'Registrar Leitura',
+          headerTitleStyle: styles.headerTitle,
+          headerStyle: styles.headerBody
+        }}
       />
     </TabOneStack.Navigator>
   );
@@ -71,8 +79,20 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+        options={{
+          headerTitle: 'Historico',
+          headerTitleStyle: styles.headerTitle,
+          headerStyle: styles.headerBody
+        }}
       />
     </TabTwoStack.Navigator>
   );
 }
+const styles = StyleSheet.create({
+  headerTitle: {
+    color: "#F7F8F7",
+  },
+  headerBody: {
+    backgroundColor: "#b5a7ff",
+  }
+});

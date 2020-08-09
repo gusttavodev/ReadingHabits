@@ -45,21 +45,21 @@ const StopWatch = (props) => {
           <Button           
             text="START"
             textColor="#F7F8F7"
-            backgroundColor="#737575"
+            backgroundColor="#b5a7ff"
             onPress={(data) => onStart()}
           />
         ) : isPaused ? (
           <Button
             text="PAUSE"
             textColor="#F7F8F7"
-            backgroundColor="#737575"
+          backgroundColor="#b5a7ff"
             onPress={(data) => onStop()}
           />
         ) : (
           <Button
             text="RESUME"
             textColor="#F7F8F7"
-            backgroundColor="#737575"
+            backgroundColor="#b5a7ff"
             onPress={(data) => onResume()}
           />
         )}
@@ -67,7 +67,7 @@ const StopWatch = (props) => {
         <Button
           text="RESET"
           textColor="#F7F8F7"
-          backgroundColor="#737575"
+          backgroundColor="#b5a7ff"
           onPress={(data) => onReset()}
         />
       </View>
