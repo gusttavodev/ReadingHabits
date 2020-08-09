@@ -10,8 +10,19 @@ const BottomTab = createBottomTabNavigator();
 export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
+     
       initialRouteName="TabOne"
-      tabBarOptions={{ activeTintColor: "red" }}>
+      tabBarOptions={{
+        activeTintColor: '#F7F8F7',
+        inactiveTintColor: '#737575',
+        style: {
+          backgroundColor: '#A6A8AE',
+        },
+        labelStyle: {
+          textAlign: 'center',
+          fontSize: 16
+        },
+      }}>
       <BottomTab.Screen
         name="TabOne"
         component={TabOneNavigator}
