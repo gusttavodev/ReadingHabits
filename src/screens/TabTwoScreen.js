@@ -20,8 +20,8 @@ export default function TabTwoScreen() {
 
   const renderItem = ({ item }) => (
     <View style={styles.card}>
-      <Text style={styles.title}>{item.created_at} - Média: {item.average}</Text>
-      <Text style={styles.text}>Você leu {item.pages} paginas em {item.duration} segundos</Text>     
+      <Text style={styles.title}>{item.created_at} - {item.pages} Paginas </Text>      
+      <Text style={styles.text}>Foi lida 1 pagina em {item.average} segundos</Text>     
     </View>    
   );
 
@@ -47,16 +47,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
-    padding: 15,
-    paddingLeft: 60,
-    paddingRight: 60,
+    padding: 20,
+    paddingLeft: 40,
+    paddingRight: 40,
     marginTop: 20,
     backgroundColor: "#b5a7ff",
     flex: 1,
   },
   container: {
     backgroundColor: "#ffc5dd",
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },

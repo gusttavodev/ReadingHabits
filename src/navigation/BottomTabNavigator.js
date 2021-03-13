@@ -96,3 +96,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#b5a7ff",
   }
 });
+
+/**
+ * 
+ * disable:  	#d6b5ff
+    shadow: #b5a7ff
+    destaque: #ffb4ed
+    background: #ffc5dd
+ */

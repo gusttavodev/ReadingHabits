@@ -56,8 +56,11 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.sphereOne}>
+        
+      </View>
       <View style={styles.separator} />
-      <Text style={styles.title}>Stopwatch</Text>
+      <Text style={styles.title}>Cronometro</Text>
       <StopWatch
         onStop={(data) => onStop(data)}
         onStart={(data) => onStart(data)}
@@ -74,12 +77,12 @@ export default function TabOneScreen() {
         value={`${numberOfPages}`}
       />
       <View style={styles.container}>
-      <Button
+        {/* <Button
           text="LIMPAR"
           textColor="#F7F8F7"
           backgroundColor="#b5a7ff"
           onPress={(data) => clear()}
-        />
+        /> */}
         <Button
           text="SALVAR LEITURA"
           textColor="#F7F8F7"
@@ -92,6 +95,13 @@ export default function TabOneScreen() {
 }
 
 const styles = StyleSheet.create({
+  sphereOne: {
+    width: 200,
+    height: 50,
+    backgroundColor: "#b5a7ff",
+    borderBottomRightRadius: 50,
+    borderBottomLeftRadius: 50,
+  },
   container: {
     backgroundColor: "#ffc5dd",
     flex: 1,
